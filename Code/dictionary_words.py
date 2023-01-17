@@ -24,7 +24,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     number_of_words = args.number_of_words
 
-    sentence = print(create_sentence(number_of_words))
+    print(create_sentence(number_of_words))
 
 
     
