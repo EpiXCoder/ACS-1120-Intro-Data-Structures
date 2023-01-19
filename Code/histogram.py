@@ -20,12 +20,8 @@ def histogram(source_text):
     sorted_word_count = {i: word_count[i] for i in wordKeys}
     return sorted_word_count
     
-
-
-
 def unique_words(histogram):
-    unique_words = len(histogram)
-    return unique_words
+    return len(histogram)
 
 def frequency(word, histogram):
     return histogram.get(word, "not found")
