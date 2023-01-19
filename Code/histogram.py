@@ -30,9 +30,9 @@ def unique_words(histogram):
 def frequency(word, histogram):
     return histogram.get(word, "not found")
 
-print(histogram(text))
-print(unique_words(histogram(text)))
 histogram = histogram(text)
+print(histogram)
+print(unique_words(histogram))
 print(frequency('rat', histogram))
 
 
