@@ -41,15 +41,16 @@ def simulation(histogram, iterations):
         selected_word = weighted_selection(histogram)
         word_frequencies[selected_word] += 1
     for word, frequency in word_frequencies.items():
-        print(f'{word}: {frequency}')
+        if frequency != 0:
+            print(f'{word}: {frequency}')
 
 
 
 
 if __name__ == '__main__':
-    text = 'one- fish two, !fish red "fish" blue fish.'
-    # text = open("Kiyosaki.txt","r").read()
+    # text = 'one- fish two, !fish red "fish" blue fish.'
+    text = open("Kiyosaki.txt","r").read()
     histogram = histogram(text)
     print(histogram)
     # print(weighted_selection(histogram))
-    simulation(histogram, 1000)
+    simulation(histogram, 10000)
