@@ -1,8 +1,7 @@
 
 import re
+import random
 
-# text = 'one-fish two,_!fish red "fish" blue fish.'
-text = open("Kiyosaki.txt","r").read()
 
 def histogram(source_text):
     clean_text = re.sub(r"[^\w\d\s]", "", source_text)
@@ -27,25 +26,30 @@ def histogram(source_text):
     # return sorted_by_word
     return sorted_by_count_desc
     
-def unique_words(histogram):
-    return len(histogram)
+def weighted_selection(histogram):
+    words_and_counts = list(histogram.items())
+    words, weights = zip(*words_and_counts)
+    selected_word = random.choices(words, weights=weights)[0]
+    return selected_word
+    
 
-def frequency(word, histogram):
-    return histogram.get(word, "not found")
+def simulation(histogram, iterations):
+    num_iterations = iterations
+    word_frequencies = {word: 0 for word in histogram.keys()}
+
+    for _ in range(num_iterations):
+        selected_word = weighted_selection(histogram)
+        word_frequencies[selected_word] += 1
+    for word, frequency in word_frequencies.items():
+        print(f'{word}: {frequency}')
 
 
-def writing_to_txt(histogram):
-    df=open('histogram.txt','w')
-    for key in histogram:
-        df.write(key)
-        df.write(' ')
-        df.write(str(histogram[key]))
-        df.write('\n')
-    df.close()
+
 
 if __name__ == '__main__':
+    text = 'one- fish two, !fish red "fish" blue fish.'
+    # text = open("Kiyosaki.txt","r").read()
     histogram = histogram(text)
     print(histogram)
-    print(unique_words(histogram))
-    print(frequency('anarchy', histogram))
-    writing_to_txt(histogram)
+    # print(weighted_selection(histogram))
+    simulation(histogram, 1000)
