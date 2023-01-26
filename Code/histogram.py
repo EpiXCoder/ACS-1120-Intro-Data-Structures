@@ -5,7 +5,7 @@ import re
 text = open("Kiyosaki.txt","r").read()
 
 def histogram(source_text):
-    clean_text = re.sub(r"[^\w\d\s]", "", source_text)
+    clean_text = re.sub(r"[^\w\d\s-]", "", source_text)
     word_count = dict()
     words = clean_text.lower().split()
 
@@ -28,10 +28,10 @@ def histogram(source_text):
     return sorted_by_count_desc
     
 def unique_words(histogram):
-    return len(histogram)
+    return f"Numer of unique words: {len(histogram)}"
 
 def frequency(word, histogram):
-    return histogram.get(word, "not found")
+    return f"Number of times '{word}' is found in the text: {histogram.get(word, 'not found')}"
 
 
 def writing_to_txt(histogram):

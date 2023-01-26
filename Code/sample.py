@@ -4,7 +4,7 @@ import random
 
 
 def histogram(source_text):
-    clean_text = re.sub(r"[^\w\d\s]", "", source_text)
+    clean_text = re.sub(r"[^\w\d\s-]", "", source_text)
     word_count = dict()
     words = clean_text.lower().split()
 
@@ -31,7 +31,8 @@ def weighted_selection(histogram):
     words, weights = zip(*words_and_counts)
     selected_word = random.choices(words, weights=weights)[0]
     return selected_word
-    
+    # random_word = random.choices(list(words_histogram.keys()),weights=words_histogram.values(),k=1)[0]
+   
 
 def simulation(histogram, iterations):
     num_iterations = iterations
@@ -44,13 +45,22 @@ def simulation(histogram, iterations):
         if frequency != 0:
             print(f'{word}: {frequency}')
 
-
+def sentence_gen(count):
+    # text = 'one- fish two, !fish red "fish" blue fish.'
+    text = open("Kiyosaki.txt","r").read()
+    wordlist = histogram(text)
+    selected_words = []
+    for i in range (count):
+        selected_words.append(weighted_selection(wordlist))
+    sentence = f'{" ".join(selected_words)}.'
+    return sentence.capitalize()
 
 
 if __name__ == '__main__':
-    # text = 'one- fish two, !fish red "fish" blue fish.'
-    text = open("Kiyosaki.txt","r").read()
-    histogram = histogram(text)
-    print(histogram)
+    text = 'one- fish two, !fish red "fish" blue fish.'
+    # text = open("Kiyosaki.txt","r").read()
+    histogram_text = histogram(text)
+    print(histogram_text)
     # print(weighted_selection(histogram))
-    simulation(histogram, 10000)
+    simulation(histogram_text, 10000)
+    print(sentence_gen(10))
