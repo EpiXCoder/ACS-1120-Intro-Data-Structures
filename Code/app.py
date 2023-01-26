@@ -1,5 +1,5 @@
 """Main script, uses other modules to generate sentences."""
-from flask import Flask
+from flask import Flask, request
 import re
 import random
 
@@ -15,7 +15,8 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     """Route that returns a web page containing the generated text."""
-    sentence = sentence_gen(20)
+    num_of_words = int(request.args.get("num"))
+    sentence = sentence_gen(num_of_words)
     return f"<p>{sentence}</p>"
   
 
