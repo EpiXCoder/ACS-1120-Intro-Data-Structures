@@ -46,12 +46,12 @@ def simulation(histogram, iterations):
         if frequency != 0:
             print(f'{word}: {frequency}')
 
-def sentence_gen(count):
+def sentence_gen():
     # text = 'one- fish two, !fish red "fish" blue fish.'
     text = open("Kiyosaki.txt","r").read()
     wordlist = histogram(text)
     selected_words = []
-    for i in range (count):
+    for i in range (10):
         selected_words.append(weighted_selection(wordlist))
     sentence = f'{" ".join(selected_words)}.'
     return sentence.capitalize()
@@ -60,4 +60,4 @@ def sentence_gen(count):
 @app.route('/TweetGen')
 def tweet_deploy():
     # text = 'one- fish two, !fish red "fish" blue fish.'
-    return(sentence_gen(10))
+    return(sentence_gen())
