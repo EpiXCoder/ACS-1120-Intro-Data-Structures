@@ -57,7 +57,7 @@ def sentence_gen():
     return sentence.capitalize()
 
 
-@app.route('/TweetGen')
+@app.route('/')
 def tweet_deploy():
     # text = 'one- fish two, !fish red "fish" blue fish.'
     sentence = sentence_gen()
