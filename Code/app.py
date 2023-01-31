@@ -60,4 +60,5 @@ def sentence_gen():
 @app.route('/TweetGen')
 def tweet_deploy():
     # text = 'one- fish two, !fish red "fish" blue fish.'
-    return(sentence_gen())
+    sentence = sentence_gen()
+    return f"<p>{sentence}</p>"
