@@ -89,18 +89,28 @@ class LinkedList:
             self.head = new_node # O(1) time for variable assignment
             self.tail = new_node # O(1) time for variable assignment
 
-    def find(self, matcher):
+    def find(self, match):
         """Return an item from this linked list if it is present.
         TODO: Best case running time: O(???) Why and under what conditions?
         TODO: Worst case running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes to find item, if present return True otherwise False
+        
+        #input is an item
         node = self.head # O(1) time for variable assignment
         while node is not None: # Always n iterations because we have to crawl along the whole list
-            if node.data == matcher: # O(1) time to check match
+            if node.data == match: # O(1) time to check match
                 return True # O(1) time to return boolean
             else: 
                 node = node.next # O(1) time for variable assignment
-        return False # O(1) time to return boolean
+        return False # O(1) time to return boolean    
+    
+    def find_using_lambda_fn(self, matcher):
+        node = self.head
+        while node: 
+            if matcher(node.data):
+                return node.data
+            node = node.next
+        return None
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
