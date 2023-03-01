@@ -59,29 +59,29 @@ class HashTable(object):
         """Return a list of all items (key-value pairs) in this hash table.
         TODO: Running time: O(???) Why and under what conditions?"""
         # Collect all pairs of key-value entries in each bucket
-        all_items = []
-        for bucket in self.buckets:
-            all_items.extend(bucket.items())
-        return all_items
+        all_items = []  # O(1) time to create empty list
+        for bucket in self.buckets: # Always n iterations because no early return
+            all_items.extend(bucket.items())  # O(1) time (on average) to append to list
+        return all_items # O(1) time to return list
 
     def length(self):
         """Return the number of key-value entries by traversing its buckets.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all buckets
         # TODO: Count number of key-value entries in each bucket
-        length = 0
-        for bucket in self.buckets:
-            length += bucket.length()
-        return length
+        length = 0 # O(1) time to create variable
+        for bucket in self.buckets:  # Always n iterations because no early return
+            length += bucket.length() # O(1) time (on average) to add
+        return length # O(1) time to return the variable
 
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Find bucket where given key belongs
         # TODO: Check if key-value entry exists in bucket
-        bucket = self._find_bucket(key)
-        entry = bucket.find_using_lambda_fn(lambda entry: entry[0] == key)
-        if entry is not None: 
+        bucket = self._find_bucket(key) # O(1) time (on average) to call coupled functions to find bucket
+        entry = bucket.find_using_lambda_fn(lambda entry: entry[0] == key) # O(1) time (on average) to call coupled functions to find entry
+        if entry is not None: # O(1) time to evaluate conditional
             return True
         else: 
             return False
@@ -94,13 +94,13 @@ class HashTable(object):
         # TODO: If found, return value associated with given key
         # TODO: Otherwise, raise error to tell user get failed
         # Hint: raise KeyError('Key not found: {}'.format(key))
-        bucket = self._find_bucket(key)
-        entry = bucket.find_using_lambda_fn(lambda entry: entry[0] == key)
-        if entry is not None: 
-            value = entry[1]
-            return value
+        bucket = self._find_bucket(key) # O(1) time (on average) to call coupled functions to find bucket
+        entry = bucket.find_using_lambda_fn(lambda entry: entry[0] == key) # O(1) time (on average) to call coupled functions to find entry
+        if entry is not None:  # O(1) time to evaluate conditional
+            value = entry[1]  # O(1) time to access and assign data to value
+            return value # O(1) time to return the variable
         else: 
-            raise KeyError('Key not found: {}'.format(key))
+            raise KeyError('Key not found: {}'.format(key)) # O(1) time to raise error
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.
@@ -109,14 +109,14 @@ class HashTable(object):
         # TODO: Check if key-value entry exists in bucket
         # TODO: If found, update value associated with given key
         # TODO: Otherwise, insert given key-value entry into bucket
-        bucket = self._find_bucket(key)
-        node = bucket.head
-        while node: 
-            if node.data[0] == key:
-                node.data = (key, value)
+        bucket = self._find_bucket(key) # O(1) time (on average) to call coupled functions to find bucket
+        node = bucket.head # O(1) time (on average) to call coupled functions to find node
+        while node: # Always n iterations because no early return
+            if node.data[0] == key:   # O(1) time to evaluate conditional
+                node.data = (key, value)  #O(1) for assignment
                 return
-            node = node.next
-        bucket.append((key, value))
+            node = node.next #O(1) for assignment
+        bucket.append((key, value)) # O(1) time (on average) to append to list
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
@@ -126,12 +126,12 @@ class HashTable(object):
         # TODO: If found, delete entry associated with given key
         # TODO: Otherwise, raise error to tell user delete failed
         # Hint: raise KeyError('Key not found: {}'.format(key))
-        bucket = self._find_bucket(key)
-        entry = bucket.find_using_lambda_fn(lambda entry: entry[0] == key)
-        if entry is None:
-            raise KeyError('Key not found: {}'.format(key))
+        bucket = self._find_bucket(key) # O(1) time (on average) to call coupled functions to find bucket
+        entry = bucket.find_using_lambda_fn(lambda entry: entry[0] == key) # O(1) time (on average) to call coupled functions to find entry
+        if entry is None:  # O(1) time to evaluate conditional
+            raise KeyError('Key not found: {}'.format(key))  # O(1) time to raise error
         else: 
-            bucket.delete((entry))
+            bucket.delete((entry))  # O(1) time to delete entry
 
 def test_hash_table():
     ht = HashTable()

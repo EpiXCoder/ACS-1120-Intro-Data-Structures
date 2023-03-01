@@ -137,7 +137,7 @@ class LinkedList:
             return # O(1) time to terminate process flow
 
         #here we will crawl along rest of list
-        while node is not None: # m+1 iterations (m being the position of the item being deleted) because we have to crawl along until item is found then also find the next item
+        while node is not None: # m iterations (n being the position of the item being deleted) because we have to crawl along until item is found then also find the next item
             next_node = node.next # O(1) time for variable assignment
             if next_node is not None: # O(1) time to check
                 if next_node.data == item: # O(1) time to check

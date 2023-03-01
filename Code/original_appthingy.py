@@ -1,5 +1,5 @@
 """Main script, uses other modules to generate sentences."""
-from flask import Flask, request
+from flask import Flask, request, render_template
 import re
 import random
 
